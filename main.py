@@ -8,6 +8,29 @@ from tetrominos import Tetrinimo
 square_size = 25
 
 
+def clean_board(board: List[List[Cell]]):
+    row: int = 21
+    while row >= 0:
+        if is_row_complete(board[row]):
+            print("Row " + str(row) + " is complete!")
+            shift(board, row)
+        else:
+            row = row - 1
+
+
+def is_row_complete(row: List[Cell]) -> bool:
+    for cell in row:
+        if cell == Cell.EMPTY:
+            return False
+    return True
+
+
+def shift(board: List[List[Cell]], row: int):
+    for y in range(row, 0, -1):
+        for x in range(12):
+            board[y][x] = board[y-1][x]
+
+
 def main():
     board = [[Cell.EMPTY for _ in range(12)] for _ in range(22)]
 
@@ -60,7 +83,10 @@ def main():
         if pygame.time.get_ticks() - last_tick > 150:
             if count_cannot_go_down >= 3:
                 freeze(current_tetromino, board)
+                clean_board(board)
                 current_tetromino = Tetrinimo()
+                if not is_position_valid(current_tetromino.get_positions(), board):
+                    running = False
 
             future_positions: list[Position] = current_tetromino.try_command(Command.DOWN)
 
@@ -110,7 +136,7 @@ def main():
     pygame.quit()
 
 
-def is_position_valid(future_positions: List[Position], board):
+def is_position_valid(future_positions: List[Position], board: List[List[Cell]]):
     for pos in future_positions:
         if pos.x < 0 or pos.x >= 12:
             return False
@@ -122,7 +148,7 @@ def is_position_valid(future_positions: List[Position], board):
     return True
 
 
-def freeze(current_tetromino: Tetrinimo, board):
+def freeze(current_tetromino: Tetrinimo, board: List[List[Cell]]):
     for pos in current_tetromino.get_positions():
         board[pos.y][pos.x] = current_tetromino.get_cell()
 

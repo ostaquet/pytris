@@ -52,7 +52,7 @@ def get_random() -> TetriminoType:
 class Tetrinimo:
 
     def __init__(self):
-        self.pos: Position = Position(5, 0)
+        self.pos: Position = Position(5, 1)
         self.tetrinimo_type: TetriminoType = get_random()
         self.angle: int = 0
 
