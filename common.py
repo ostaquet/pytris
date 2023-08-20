@@ -17,7 +17,7 @@ class Cell(Enum):
     DARK_BLUE = 6
     PURPLE = 7
 
-    def get_color_for(self) -> tuple[int, int, int]:
+    def get_color(self) -> tuple[int, int, int]:
         if self == Cell.EMPTY:
             return dark_grey
         elif self == Cell.RED:
@@ -47,13 +47,13 @@ class Command(Enum):
 
 
 # Set up colors
-black = (0, 0, 0)
-dark_grey = (43, 43, 43)
-red = (255, 0, 36)
-orange = (255, 144, 0)
-yellow = (255, 224, 0)
-green = (0, 186, 50)
-light_blue = (0, 175, 231)
-dark_blue = (0, 92, 162)
-purple = (159, 30, 144)
-white = (255, 255, 255)
+black: tuple[int, int, int] = (0, 0, 0)
+dark_grey: tuple[int, int, int] = (43, 43, 43)
+red: tuple[int, int, int] = (255, 0, 36)
+orange: tuple[int, int, int] = (255, 144, 0)
+yellow: tuple[int, int, int] = (255, 224, 0)
+green: tuple[int, int, int] = (0, 186, 50)
+light_blue: tuple[int, int, int] = (0, 175, 231)
+dark_blue: tuple[int, int, int] = (0, 92, 162)
+purple: tuple[int, int, int] = (159, 30, 144)
+white: tuple[int, int, int] = (255, 255, 255)

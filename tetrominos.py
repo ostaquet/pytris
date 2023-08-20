@@ -52,118 +52,118 @@ def get_random() -> TetriminoType:
 class Tetrinimo:
 
     def __init__(self):
-        self.pos: Position = Position(5, 1)
-        self.tetrinimo_type: TetriminoType = get_random()
-        self.angle: int = 0
+        self._pos: Position = Position(5, 1)
+        self._tetrinimo_type: TetriminoType = get_random()
+        self._angle: int = 0
 
     def get_positions(self) -> List[Position]:
-        if self.tetrinimo_type == TetriminoType.TETRIMINO_O:
-            return [Position(self.pos.x, self.pos.y),
-                    Position(self.pos.x+1, self.pos.y),
-                    Position(self.pos.x, self.pos.y+1),
-                    Position(self.pos.x+1, self.pos.y+1)]
+        if self._tetrinimo_type == TetriminoType.TETRIMINO_O:
+            return [Position(self._pos.x, self._pos.y),
+                    Position(self._pos.x + 1, self._pos.y),
+                    Position(self._pos.x, self._pos.y + 1),
+                    Position(self._pos.x + 1, self._pos.y + 1)]
 
-        if self.tetrinimo_type == TetriminoType.TETRIMINO_I:
-            if self.angle == 90 or self.angle == 180:
-                return [Position(self.pos.x - 1, self.pos.y),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x + 1, self.pos.y),
-                        Position(self.pos.x + 2, self.pos.y)]
+        if self._tetrinimo_type == TetriminoType.TETRIMINO_I:
+            if self._angle == 90 or self._angle == 180:
+                return [Position(self._pos.x - 1, self._pos.y),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x + 1, self._pos.y),
+                        Position(self._pos.x + 2, self._pos.y)]
             else:
-                return [Position(self.pos.x, self.pos.y - 1),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x, self.pos.y + 1),
-                        Position(self.pos.x, self.pos.y + 2)]
+                return [Position(self._pos.x, self._pos.y - 1),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x, self._pos.y + 1),
+                        Position(self._pos.x, self._pos.y + 2)]
 
-        if self.tetrinimo_type == TetriminoType.TETRIMINO_T:
-            if self.angle == 0:
-                return [Position(self.pos.x, self.pos.y-1),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x - 1, self.pos.y),
-                        Position(self.pos.x + 1, self.pos.y)]
-            if self.angle == 90:
-                return [Position(self.pos.x, self.pos.y - 1),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x + 1, self.pos.y),
-                        Position(self.pos.x, self.pos.y + 1)]
-            if self.angle == 180:
-                return [Position(self.pos.x - 1, self.pos.y),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x + 1, self.pos.y),
-                        Position(self.pos.x, self.pos.y + 1)]
-            if self.angle == 270:
-                return [Position(self.pos.x, self.pos.y-1),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x, self.pos.y+1),
-                        Position(self.pos.x-1, self.pos.y)]
+        if self._tetrinimo_type == TetriminoType.TETRIMINO_T:
+            if self._angle == 0:
+                return [Position(self._pos.x, self._pos.y - 1),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x - 1, self._pos.y),
+                        Position(self._pos.x + 1, self._pos.y)]
+            if self._angle == 90:
+                return [Position(self._pos.x, self._pos.y - 1),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x + 1, self._pos.y),
+                        Position(self._pos.x, self._pos.y + 1)]
+            if self._angle == 180:
+                return [Position(self._pos.x - 1, self._pos.y),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x + 1, self._pos.y),
+                        Position(self._pos.x, self._pos.y + 1)]
+            if self._angle == 270:
+                return [Position(self._pos.x, self._pos.y - 1),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x, self._pos.y + 1),
+                        Position(self._pos.x - 1, self._pos.y)]
 
-        if self.tetrinimo_type == TetriminoType.TETRIMINO_L:
-            if self.angle == 0:
-                return [Position(self.pos.x, self.pos.y + 1),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x + 1, self.pos.y),
-                        Position(self.pos.x + 2, self.pos.y)]
-            if self.angle == 90:
-                return [Position(self.pos.x-1, self.pos.y),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x, self.pos.y + 1),
-                        Position(self.pos.x, self.pos.y + 2)]
-            if self.angle == 180:
-                return [Position(self.pos.x, self.pos.y-1),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x - 1, self.pos.y),
-                        Position(self.pos.x - 2, self.pos.y)]
-            if self.angle == 270:
-                return [Position(self.pos.x+1, self.pos.y),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x, self.pos.y - 1),
-                        Position(self.pos.x, self.pos.y - 2)]
+        if self._tetrinimo_type == TetriminoType.TETRIMINO_L:
+            if self._angle == 0:
+                return [Position(self._pos.x, self._pos.y + 1),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x + 1, self._pos.y),
+                        Position(self._pos.x + 2, self._pos.y)]
+            if self._angle == 90:
+                return [Position(self._pos.x - 1, self._pos.y),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x, self._pos.y + 1),
+                        Position(self._pos.x, self._pos.y + 2)]
+            if self._angle == 180:
+                return [Position(self._pos.x, self._pos.y - 1),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x - 1, self._pos.y),
+                        Position(self._pos.x - 2, self._pos.y)]
+            if self._angle == 270:
+                return [Position(self._pos.x + 1, self._pos.y),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x, self._pos.y - 1),
+                        Position(self._pos.x, self._pos.y - 2)]
 
-        if self.tetrinimo_type == TetriminoType.TETRIMINO_J:
-            if self.angle == 0:
-                return [Position(self.pos.x-2, self.pos.y),
-                        Position(self.pos.x-1, self.pos.y),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x, self.pos.y+1)]
-            if self.angle == 90:
-                return [Position(self.pos.x, self.pos.y-2),
-                        Position(self.pos.x, self.pos.y-1),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x-1, self.pos.y)]
-            if self.angle == 180:
-                return [Position(self.pos.x, self.pos.y-1),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x + 1, self.pos.y),
-                        Position(self.pos.x + 2, self.pos.y)]
-            if self.angle == 270:
-                return [Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x+1, self.pos.y),
-                        Position(self.pos.x, self.pos.y + 1),
-                        Position(self.pos.x, self.pos.y + 2)]
+        if self._tetrinimo_type == TetriminoType.TETRIMINO_J:
+            if self._angle == 0:
+                return [Position(self._pos.x - 2, self._pos.y),
+                        Position(self._pos.x - 1, self._pos.y),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x, self._pos.y + 1)]
+            if self._angle == 90:
+                return [Position(self._pos.x, self._pos.y - 2),
+                        Position(self._pos.x, self._pos.y - 1),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x - 1, self._pos.y)]
+            if self._angle == 180:
+                return [Position(self._pos.x, self._pos.y - 1),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x + 1, self._pos.y),
+                        Position(self._pos.x + 2, self._pos.y)]
+            if self._angle == 270:
+                return [Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x + 1, self._pos.y),
+                        Position(self._pos.x, self._pos.y + 1),
+                        Position(self._pos.x, self._pos.y + 2)]
 
-        if self.tetrinimo_type == TetriminoType.TETRIMINO_Z:
-            if self.angle == 0 or self.angle == 180:
-                return [Position(self.pos.x-1, self.pos.y),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x, self.pos.y+1),
-                        Position(self.pos.x+1, self.pos.y+1)]
+        if self._tetrinimo_type == TetriminoType.TETRIMINO_Z:
+            if self._angle == 0 or self._angle == 180:
+                return [Position(self._pos.x - 1, self._pos.y),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x, self._pos.y + 1),
+                        Position(self._pos.x + 1, self._pos.y + 1)]
             else:
-                return [Position(self.pos.x, self.pos.y-1),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x-1, self.pos.y),
-                        Position(self.pos.x-1, self.pos.y+1)]
+                return [Position(self._pos.x, self._pos.y - 1),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x - 1, self._pos.y),
+                        Position(self._pos.x - 1, self._pos.y + 1)]
 
-        if self.tetrinimo_type == TetriminoType.TETRIMINO_S:
-            if self.angle == 0 or self.angle == 180:
-                return [Position(self.pos.x+1, self.pos.y),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x, self.pos.y+1),
-                        Position(self.pos.x-1, self.pos.y+1)]
+        if self._tetrinimo_type == TetriminoType.TETRIMINO_S:
+            if self._angle == 0 or self._angle == 180:
+                return [Position(self._pos.x + 1, self._pos.y),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x, self._pos.y + 1),
+                        Position(self._pos.x - 1, self._pos.y + 1)]
             else:
-                return [Position(self.pos.x, self.pos.y-1),
-                        Position(self.pos.x, self.pos.y),
-                        Position(self.pos.x+1, self.pos.y),
-                        Position(self.pos.x+1, self.pos.y+1)]
+                return [Position(self._pos.x, self._pos.y - 1),
+                        Position(self._pos.x, self._pos.y),
+                        Position(self._pos.x + 1, self._pos.y),
+                        Position(self._pos.x + 1, self._pos.y + 1)]
 
     def try_command(self, command: Command) -> list[Position]:
         positions: list[Position] = self.get_positions()
@@ -181,40 +181,40 @@ class Tetrinimo:
                 pos.x = pos.x + 1
 
         if command == Command.TURN:
-            if self.tetrinimo_type == TetriminoType.TETRIMINO_I:
-                self.angle_add()
-                self.angle_add()
+            if self._tetrinimo_type == TetriminoType.TETRIMINO_I:
+                self._angle_add()
+                self._angle_add()
                 positions = self.get_positions()
-                self.angle_sub()
-                self.angle_sub()
+                self._angle_sub()
+                self._angle_sub()
             else:
-                self.angle_add()
+                self._angle_add()
                 positions = self.get_positions()
-                self.angle_sub()
+                self._angle_sub()
 
         return positions
 
-    def angle_add(self):
-        self.angle = self.angle + 90
-        if self.angle == 360:
-            self.angle = 0
+    def _angle_add(self) -> None:
+        self._angle = self._angle + 90
+        if self._angle == 360:
+            self._angle = 0
 
-    def angle_sub(self):
-        self.angle = self.angle - 90
-        if self.angle == -90:
-            self.angle = 270
+    def _angle_sub(self) -> None:
+        self._angle = self._angle - 90
+        if self._angle == -90:
+            self._angle = 270
 
     def apply_command(self, command: Command) -> None:
         if command == Command.DOWN:
-            self.pos.y = self.pos.y + 1
+            self._pos.y = self._pos.y + 1
         if command == Command.LEFT:
-            self.pos.x = self.pos.x - 1
+            self._pos.x = self._pos.x - 1
         if command == Command.RIGHT:
-            self.pos.x = self.pos.x + 1
+            self._pos.x = self._pos.x + 1
         if command == Command.TURN:
-            self.angle_add()
-            if self.tetrinimo_type == TetriminoType.TETRIMINO_I:
-                self.angle_add()
+            self._angle_add()
+            if self._tetrinimo_type == TetriminoType.TETRIMINO_I:
+                self._angle_add()
 
     def get_cell(self) -> Cell:
-        return self.tetrinimo_type.get_cell_type()
+        return self._tetrinimo_type.get_cell_type()
