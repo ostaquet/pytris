@@ -25,7 +25,7 @@ def main():
 
     current_tetromino: Tetrinimo = Tetrinimo()
     current_command: Command = Command.NONE
-    count_cannot_go_down: int = 0
+    cannot_go_down: bool = False
     last_tick: int = pygame.time.get_ticks()
 
     # Main game loop
@@ -52,13 +52,13 @@ def main():
 
         # Apply requested command if possible
         future_positions: list[Position] = current_tetromino.try_command(current_command)
-        if is_position_valid(future_positions, board):
+        if is_position_valid(future_positions, board) and not cannot_go_down:
             current_tetromino.apply_command(current_command)
         current_command = Command.NONE
 
         # Apply gravity until we cannot go down
         if pygame.time.get_ticks() - last_tick > 150:
-            if count_cannot_go_down >= 3:
+            if cannot_go_down:
                 freeze(current_tetromino, board)
                 clean_board(board)
                 current_tetromino = Tetrinimo()
@@ -69,9 +69,9 @@ def main():
 
             if is_position_valid(future_positions, board):
                 current_tetromino.apply_command(Command.DOWN)
-                count_cannot_go_down = 0
+                cannot_go_down = False
             else:
-                count_cannot_go_down = count_cannot_go_down + 1
+                cannot_go_down = True
 
             last_tick = pygame.time.get_ticks()
 
