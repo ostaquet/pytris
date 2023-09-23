@@ -11,18 +11,17 @@ square_size: int = 25
 def main():
     board: List[List[Cell]] = [[Cell.EMPTY for _ in range(12)] for _ in range(22)]
 
-    # Initialize Pygame
+    # Initialise Pygame
     pygame.init()
 
-    # Set up the game window
+    # Défini la fenêtre de jeu
     window_width: int = 800
     window_height: int = 600
     window = pygame.display.set_mode((window_width, window_height))
     pygame.display.set_caption("Pytris")
 
-    # Game variables
+    # Variables du jeu
     running: bool = True
-
     current_tetromino: Tetrinimo = Tetrinimo()
     current_command: Command = Command.NONE
     cannot_go_down: bool = False
