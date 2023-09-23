@@ -14,6 +14,9 @@ def main():
     fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
     pygame.display.set_caption("Tetris")
 
+    # Setup des horloges internes
+    clock = pygame.time.Clock()
+
     # Variables du jeu
     game_over: bool = False
 
@@ -30,8 +33,9 @@ def main():
         # Met à jour l'écran sur base de la logique interne
         # Efface l'écran (rempli de noir)
         fenetre.fill(noir)
-        # Met à jour l'écran
-        pygame.display.update()
+        # Met à jour l'écran (max 60x par seconde)
+        pygame.display.flip()
+        clock.tick(60)
 
     # Fin du jeu
     pygame.quit()

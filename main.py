@@ -1,6 +1,5 @@
 from typing import List
 
-import pygame
 from common import *
 from tetrominos import Tetrinimo
 
@@ -20,12 +19,15 @@ def main():
     window = pygame.display.set_mode((window_width, window_height))
     pygame.display.set_caption("Pytris")
 
+    # Setup des horloges internes
+    clock = pygame.time.Clock()
+    pygame.time.set_timer(EVENT_GRAVITE, 150, 0)
+
     # Variables du jeu
     running: bool = True
     current_tetromino: Tetrinimo = Tetrinimo()
     current_command: Command = Command.NONE
     cannot_go_down: bool = False
-    last_tick: int = pygame.time.get_ticks()
 
     # Main game loop
     while running:
@@ -44,6 +46,21 @@ def main():
                     current_command = Command.DOWN
                 if event.key == pygame.K_SPACE:
                     current_command = Command.TURN
+            if event.type == EVENT_GRAVITE:
+                if cannot_go_down:
+                    freeze(current_tetromino, board)
+                    clean_board(board)
+                    current_tetromino = Tetrinimo()
+                    if not is_position_valid(current_tetromino.get_positions(), board):
+                        running = False
+
+                future_positions: list[Position] = current_tetromino.try_command(Command.DOWN)
+
+                if is_position_valid(future_positions, board):
+                    current_tetromino.apply_command(Command.DOWN)
+                    cannot_go_down = False
+                else:
+                    cannot_go_down = True
 
         # *******************************************************
         # ****************** Update game logic ******************
@@ -55,29 +72,9 @@ def main():
             current_tetromino.apply_command(current_command)
         current_command = Command.NONE
 
-        # Apply gravity until we cannot go down
-        if pygame.time.get_ticks() - last_tick > 150:
-            if cannot_go_down:
-                freeze(current_tetromino, board)
-                clean_board(board)
-                current_tetromino = Tetrinimo()
-                if not is_position_valid(current_tetromino.get_positions(), board):
-                    running = False
-
-            future_positions: list[Position] = current_tetromino.try_command(Command.DOWN)
-
-            if is_position_valid(future_positions, board):
-                current_tetromino.apply_command(Command.DOWN)
-                cannot_go_down = False
-            else:
-                cannot_go_down = True
-
-            last_tick = pygame.time.get_ticks()
-
         # *******************************************************
         # ******************** Draw the game ********************
         # *******************************************************
-
         # Clear the screen
         window.fill(black)
 
@@ -106,7 +103,10 @@ def main():
                  square_size))
 
         # Update the display
-        pygame.display.update()
+        pygame.display.flip()
+
+        # Limit the frame rate
+        clock.tick(60)
 
     # Quit Pygame
     pygame.quit()

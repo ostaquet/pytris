@@ -46,6 +46,7 @@ class Cellule(Enum):
         else:
             return blanc
 
+
 def main():
     # Initialise Pygame
     pygame.init()
@@ -55,6 +56,9 @@ def main():
     hauteur_fenetre: int = 600
     fenetre = pygame.display.set_mode((largeur_fenetre, hauteur_fenetre))
     pygame.display.set_caption("Tetris")
+
+    # Setup des horloges internes
+    clock = pygame.time.Clock()
 
     # Variables du jeu
     game_over: bool = False
@@ -89,8 +93,9 @@ def main():
                      taille_cellule,
                      taille_cellule))
 
-        # Met à jour l'écran
-        pygame.display.update()
+        # Met à jour l'écran (max 60x par seconde)
+        pygame.display.flip()
+        clock.tick(60)
 
     # Fin du jeu
     pygame.quit()
