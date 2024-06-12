@@ -11,3 +11,9 @@ Tetris clone with PyGame for educational purposes.
    - The player can move tetriminos on left or right or change the angle.
    - The goal is to fulfill rows to add score.
  
+ ## To install dependencies and run
+ 
+ ```
+ pip install
+ python3 main.py
+ ```
