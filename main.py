@@ -3,33 +3,26 @@ from typing import List
 from common import *
 from tetrominos import Tetrinimo
 
-# Set up square properties
 square_size: int = 25
-
 
 def main():
     board: List[List[Cell]] = [[Cell.EMPTY for _ in range(12)] for _ in range(22)]
 
-    # Initialise Pygame
     pygame.init()
 
-    # Défini la fenêtre de jeu
     window_width: int = 800
     window_height: int = 600
     window = pygame.display.set_mode((window_width, window_height))
     pygame.display.set_caption("Pytris")
 
-    # Setup des horloges internes
     clock = pygame.time.Clock()
-    pygame.time.set_timer(EVENT_GRAVITE, 150, 0)
+    pygame.time.set_timer(EVENT_GRAVITY, 150, 0)
 
-    # Variables du jeu
     running: bool = True
     current_tetromino: Tetrinimo = Tetrinimo()
     current_command: Command = Command.NONE
     cannot_go_down: bool = False
 
-    # Main game loop
     while running:
         # *******************************************************
         # ******************** Handle events ********************
@@ -46,7 +39,7 @@ def main():
                     current_command = Command.DOWN
                 if event.key == pygame.K_SPACE:
                     current_command = Command.TURN
-            if event.type == EVENT_GRAVITE:
+            if event.type == EVENT_GRAVITY:
                 if cannot_go_down:
                     freeze(current_tetromino, board)
                     clean_board(board)
@@ -65,8 +58,6 @@ def main():
         # *******************************************************
         # ****************** Update game logic ******************
         # *******************************************************
-
-        # Apply requested command if possible
         future_positions: list[Position] = current_tetromino.try_command(current_command)
         if is_position_valid(future_positions, board) and not cannot_go_down:
             current_tetromino.apply_command(current_command)
@@ -75,7 +66,6 @@ def main():
         # *******************************************************
         # ******************** Draw the game ********************
         # *******************************************************
-        # Clear the screen
         window.fill(black)
 
         # Draw the board

@@ -4,7 +4,6 @@ import random
 
 from common import Cell, Position, Command
 
-
 class TetriminoType(Enum):
     TETRIMINO_O = 0
     TETRIMINO_I = 1
@@ -29,6 +28,7 @@ class TetriminoType(Enum):
             return Cell.RED
         elif self == TetriminoType.TETRIMINO_S:
             return Cell.GREEN
+        raise TypeError("TetriminoType not supported")
 
 
 def get_random() -> TetriminoType:
@@ -47,6 +47,7 @@ def get_random() -> TetriminoType:
         return TetriminoType.TETRIMINO_Z
     if random_int == 6:
         return TetriminoType.TETRIMINO_S
+    raise TypeError("TetriminoType not supported")
 
 
 class Tetrinimo:
@@ -164,6 +165,8 @@ class Tetrinimo:
                         Position(self._pos.x, self._pos.y),
                         Position(self._pos.x + 1, self._pos.y),
                         Position(self._pos.x + 1, self._pos.y + 1)]
+
+        raise TypeError("TetriminoType not supported")
 
     def try_command(self, command: Command) -> list[Position]:
         positions: list[Position] = self.get_positions()

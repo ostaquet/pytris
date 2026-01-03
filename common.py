@@ -1,9 +1,7 @@
 from enum import Enum
 import pygame
 
-# Défini un événement custom
-EVENT_GRAVITE = pygame.USEREVENT + 1
-
+EVENT_GRAVITY = pygame.USEREVENT + 1
 
 class Position:
     def __init__(self, x, y):
